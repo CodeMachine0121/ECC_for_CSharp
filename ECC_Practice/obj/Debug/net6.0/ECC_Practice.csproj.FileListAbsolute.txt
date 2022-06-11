@@ -13,3 +13,5 @@ C:\Users\james\Desktop\變色龍雜湊\電動車聯網加密\ECC_for_CSharp\ECC_
 C:\Users\james\Desktop\變色龍雜湊\電動車聯網加密\ECC_for_CSharp\ECC_Practice\obj\Debug\net6.0\ECC_Practice.pdb
 C:\Users\james\Desktop\變色龍雜湊\電動車聯網加密\ECC_for_CSharp\ECC_Practice\obj\Debug\net6.0\ECC_Practice.genruntimeconfig.cache
 C:\Users\james\Desktop\變色龍雜湊\電動車聯網加密\ECC_for_CSharp\ECC_Practice\obj\Debug\net6.0\ref\ECC_Practice.dll
+C:\Users\james\Desktop\變色龍雜湊\電動車聯網加密\ECC_for_CSharp\ECC_Practice\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\james\Desktop\變色龍雜湊\電動車聯網加密\ECC_for_CSharp\ECC_Practice\obj\Debug\net6.0\ECC_Practice.csproj.CopyComplete

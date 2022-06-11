@@ -8,7 +8,7 @@ class Alice
 {
     public static byte[] alicePublicKey;
 
-    public static void Main(string[] args)
+    public Alice()
     {
         using (ECDiffieHellmanCng alice = new ECDiffieHellmanCng())
         {
