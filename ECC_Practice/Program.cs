@@ -18,10 +18,14 @@ class Alice
             alicePublicKey = alice.PublicKey.ToByteArray();
 
             Bob bob = new Bob();
-            // 導出金鑰
-            CngKey bobKey = CngKey.Import(bob.bobPublicKey, CngKeyBlobFormat.EccPublicBlob);
+            // KeyExchange
+            CngKey bobKey = CngKey.Import(bob.bobPublicKey, CngKeyBlobFormat.EccPublicBlob); 
             byte[] aliceKey = alice.DeriveKeyMaterial(bobKey);
-
+           
+            byte[] encryptedMessage = null;
+            byte[] iv = null;
+            Send(aliceKey, "Secret message", out encryptedMessage, out iv);
+            bob.Receive(encryptedMessage, iv);
         }
     }
 
@@ -36,10 +40,12 @@ class Alice
             using (MemoryStream ciphertext = new MemoryStream())
             using (CryptoStream cs = new CryptoStream(ciphertext, aes.CreateEncryptor(), CryptoStreamMode.Write))
             {
-                byte[] plaintextMessage = Encoding.UTF8.GetBytes(secretMessage);
-                cs.Write(plaintextMessage, 0, plaintextMessage.Length);
+                byte[] plaintextMessage = Encoding.UTF8.GetBytes(secretMessage); // 將明文->byte array
+                cs.Write(plaintextMessage, 0, plaintextMessage.Length); // E(plainText)
                 cs.Close();
-                encryptedMessage = ciphertext.ToArray();
+                encryptedMessage = ciphertext.ToArray(); // 密文 -> byte array 
+                
+                Console.WriteLine($"CipherText: {BitConverter.ToString(encryptedMessage).Replace("-","")}");
             }
         }
     }
@@ -59,8 +65,30 @@ class Alice
                 bobPublicKey = bob.PublicKey.ToByteArray();
                 // 倒出私鑰
                 bobKey = bob.DeriveKeyMaterial(CngKey.Import(Alice.alicePublicKey, CngKeyBlobFormat.EccPublicBlob));
-
             }
         }
+
+        public void Receive(byte[] encryptedMessage, byte[] iv)
+        {
+            using (Aes aes = new AesCryptoServiceProvider())
+            {
+                aes.Key = bobKey;
+                aes.IV = iv;
+                
+                // Decrypt cipherText
+                using (MemoryStream plaintext = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(plaintext, aes.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(encryptedMessage, 0, encryptedMessage.Length);
+                        cs.Close();
+
+                        string message = Encoding.UTF8.GetString(plaintext.ToArray());
+                        Console.WriteLine($"PlainText: {message}");
+                    }
+                }
+            }
+        }
+        
     }
 }

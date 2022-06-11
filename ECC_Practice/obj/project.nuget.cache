@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IH3fpINdF5xDIcEfdlSN+k3jbAhOKbpipmihvG3QsaKRKnXcZfwgxeSodKcHH8HfQ4rDJrqoc/3F59tdqcpaFg==",
+  "dgSpecHash": "ULASPSqeFsXyAMO8rPve+vl1dFRhmcqWc9UOwDTd9raEdKGc6vD1s7IQ5FhNpDi/g2jz0LHe2csu71x7B828Xg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\james\\Desktop\\C#\\ECC_Practice\\ECC_Practice\\ECC_Practice.csproj",
+  "projectFilePath": "C:\\Users\\james\\Desktop\\變色龍雜湊\\電動車聯網加密\\ECC_for_CSharp\\ECC_Practice\\ECC_Practice.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
