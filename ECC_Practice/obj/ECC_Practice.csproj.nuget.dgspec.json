@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\james\\Desktop\\變色龍雜湊\\電動車聯網加密\\ECC_for_CSharp\\ECC_Practice\\ECC_Practice.csproj": {}
+    "C:\\Users\\james\\Desktop\\C#\\ECC_Practice\\ECC_Practice\\ECC_Practice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\james\\Desktop\\變色龍雜湊\\電動車聯網加密\\ECC_for_CSharp\\ECC_Practice\\ECC_Practice.csproj": {
+    "C:\\Users\\james\\Desktop\\C#\\ECC_Practice\\ECC_Practice\\ECC_Practice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\james\\Desktop\\變色龍雜湊\\電動車聯網加密\\ECC_for_CSharp\\ECC_Practice\\ECC_Practice.csproj",
+        "projectUniqueName": "C:\\Users\\james\\Desktop\\C#\\ECC_Practice\\ECC_Practice\\ECC_Practice.csproj",
         "projectName": "ECC_Practice",
-        "projectPath": "C:\\Users\\james\\Desktop\\變色龍雜湊\\電動車聯網加密\\ECC_for_CSharp\\ECC_Practice\\ECC_Practice.csproj",
+        "projectPath": "C:\\Users\\james\\Desktop\\C#\\ECC_Practice\\ECC_Practice\\ECC_Practice.csproj",
         "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\james\\Desktop\\變色龍雜湊\\電動車聯網加密\\ECC_for_CSharp\\ECC_Practice\\obj\\",
+        "outputPath": "C:\\Users\\james\\Desktop\\C#\\ECC_Practice\\ECC_Practice\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

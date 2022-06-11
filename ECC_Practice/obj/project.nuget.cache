@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0nve3HpYOzG/X7CjCY6tNx5YnZtiMywNBXg5ioKzQn6rcOgbPNrWPhHG1fBT/khQvr0ynTiFTuZTCINlOlzYfQ==",
+  "dgSpecHash": "HKGdct1Iw/iHrlekO3jTxYeROnQ8QrX03Aq18fKeZPjiGZc2pnFsL1TJAQEv8CU7f95OmUP3IfiTYQWG/tQXog==",
   "success": true,
-  "projectFilePath": "C:\\Users\\james\\Desktop\\變色龍雜湊\\電動車聯網加密\\ECC_for_CSharp\\ECC_Practice\\ECC_Practice.csproj",
+  "projectFilePath": "C:\\Users\\james\\Desktop\\C#\\ECC_Practice\\ECC_Practice\\ECC_Practice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\james\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512"
   ],
