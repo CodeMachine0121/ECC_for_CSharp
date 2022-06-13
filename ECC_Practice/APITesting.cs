@@ -1,17 +1,6 @@
-﻿
-using System.Net.Http.Json;
-using System.Text;
-using Newtonsoft.Json;
-
-
+﻿using Newtonsoft.Json;
 namespace ECC_Practice;
 using System;
-using System.IO;
-using System.Net;
-using System.Text.Json;
-using System.Collections.Specialized;
-
-
 
 public class PointObject{
     public string x { get; set; }
@@ -27,7 +16,8 @@ public class APITesting
             var response = client.GetAsync("https://localhost:7277/publicKey").Result;
             response.EnsureSuccessStatusCode();
             string body = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("[+] GET: "+body);
+            var point = JsonConvert.DeserializeObject<PointObject>(body);
+            Console.WriteLine("[+] GET: {"+point.x+" , "+point.y+"}");
         }
     }
     public async void POST(string x, string y)
@@ -45,7 +35,7 @@ public class APITesting
 
                 string body = await response.Content.ReadAsStringAsync();
                 var responsePoint = JsonConvert.DeserializeObject<PointObject>(body);
-                Console.WriteLine("[+] POST: "+responsePoint.x);
+                Console.WriteLine("[+] POSTT: {"+responsePoint.x+" , "+responsePoint.y+"}");
             }
             catch (Exception e)
             {
@@ -54,7 +44,5 @@ public class APITesting
             }
 
         }
-
-
     }
 }
