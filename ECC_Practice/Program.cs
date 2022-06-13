@@ -10,28 +10,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        // 發送方的
-        KeyGenerator sender = new KeyGenerator(256);
-        ECPoint senderPublicKey = sender.getPublicKey();
-        ChameleonHash senderCH = new ChameleonHash(sender.getBasePoint(), sender.getPrivateKey(), senderPublicKey);
-        var senderRP = senderPublicKey;
-        
-
-        KeyGenerator receiver = new KeyGenerator(256);
-        ECPoint receiverPublicKey = receiver.getPublicKey();
-        ChameleonHash receiverCH = new ChameleonHash(receiver.getBasePoint(), receiver.getPrivateKey(), receiverPublicKey);
-        var recevierRP = receiverPublicKey;
-        
-        // 發送方設定 sessionkey
-        senderCH.setSessionkey(recevierRP);
-        receiverCH.setSessionkey(senderRP);
-
-        string msg = "Hall";
-        var rOrder = receiver.getPublicKey().Curve.Order;
-        var r = receiverCH.Signing(msg, rOrder);
-        var result = senderCH.Verifying(msg, r, receiver.getPublicKey());
-        Console.WriteLine(result);
-
+        var receiver = new KeyGenerator(256);
+        var receiverCH = new ChameleonHash(receiver.getBasePoint(), receiver.getPrivateKey(), receiver.getPublicKey());
         
         // API Testing
         var api = new APITesting();
@@ -47,12 +27,17 @@ public class Program
         api.sessionRequest(x, y);
         
         // send message
-        string sendMSG = "Hello world";
+        string msg = "Hello world";
+        string sendMSG = AESCipher.Encryption( msg, receiverCH.sessionKey.ToString(16)); // encryption
         var order = receiver.getPublicKey().Curve.Order;
-        var signature= receiverCH.Signing(sendMSG, order).ToString(16);
+        var signature= receiverCH.Signing(msg, order).ToString(16);
         var publicKeyObj = new PointObject() { x = receiver.getPublicKey().XCoord.ToString(), y = receiver.getPublicKey().YCoord.ToString()};
+        
+        // send Reqeust
         MessageObject response = api.dataRequest(sendMSG, signature,publicKeyObj).Result;
-        var verifyResult = receiverCH.Verifying(response.message, new BigInteger(response.signature, 16), serverPublickey);
-
+        var demsg = AESCipher.Decryption(response.message, receiverCH.sessionKey.ToString(16));
+        var verifyResult = receiverCH.Verifying(demsg, new BigInteger(response.signature, 16), serverPublickey);
+        
+     
     }
 }
