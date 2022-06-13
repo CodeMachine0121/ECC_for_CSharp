@@ -1,9 +1,6 @@
-﻿using System.Security.Cryptography;
-using Org.BouncyCastle.Asn1.Cmp;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.OpenSsl;
-using ECCurve = Org.BouncyCastle.Math.EC.ECCurve;
+﻿using ECC_Practice.Models;
+using Newtonsoft.Json;
+using Org.BouncyCastle.Math;
 using ECPoint = Org.BouncyCastle.Math.EC.ECPoint;
 
 
@@ -29,19 +26,33 @@ public class Program
         senderCH.setSessionkey(recevierRP);
         receiverCH.setSessionkey(senderRP);
 
-
         string msg = "Hall";
-        var r = receiverCH.Signing(msg);
-
+        var rOrder = receiver.getPublicKey().Curve.Order;
+        var r = receiverCH.Signing(msg, rOrder);
         var result = senderCH.Verifying(msg, r, receiver.getPublicKey());
-        
         Console.WriteLine(result);
 
+        
+        // API Testing
         var api = new APITesting();
         var x=receiver.getPublicKey().XCoord.ToString();
         var y=receiver.getPublicKey().YCoord.ToString();
-        api.GET();
-        api.POST(x,y);
+
+
+        var requestPublicKey = api.getPublicKey_from_API();
+        var serverPublickey = receiver.getPublicKey().Curve.CreatePoint(
+            new BigInteger(requestPublicKey.Result[0], 16),
+            new BigInteger(requestPublicKey.Result[1], 16));
+        receiverCH.setSessionkey(serverPublickey);
+        api.sessionRequest(x, y);
+        
+        // send message
+        string sendMSG = "Hello world";
+        var order = receiver.getPublicKey().Curve.Order;
+        var signature= receiverCH.Signing(sendMSG, order).ToString(16);
+        var publicKeyObj = new PointObject() { x = receiver.getPublicKey().XCoord.ToString(), y = receiver.getPublicKey().YCoord.ToString()};
+        MessageObject response = api.dataRequest(sendMSG, signature,publicKeyObj).Result;
+        var verifyResult = receiverCH.Verifying(response.message, new BigInteger(response.signature, 16), serverPublickey);
 
     }
 }
