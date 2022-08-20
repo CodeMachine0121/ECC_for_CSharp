@@ -8,10 +8,11 @@ using System;
 
 public class APITesting
 {
-    public const string HOST = "https://localhost:7277";
+    public const string HOST = "http://192.168.50.173:5277";
     
     public async Task<string[]> getPublicKey_from_API()
     {
+        // 請求變色龍雜湊公鑰
         Console.WriteLine("[+] Get PublicKey Phase: ");
         using (var client = new HttpClient())
         {
@@ -26,6 +27,7 @@ public class APITesting
     }
     public async void sessionRequest(string x, string y)
     {
+        // 金鑰交換請求
         Console.WriteLine("[+] SessionKey Request Phase: ");
         using (var client = new HttpClient())
         {

@@ -10,6 +10,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        
         var receiver = new KeyGenerator(256);
         var receiverCH = new ChameleonHash(receiver.getBasePoint(), receiver.getPrivateKey(), receiver.getPublicKey());
         
@@ -27,7 +28,10 @@ public class Program
         api.sessionRequest(x, y);
         
         // send message
-        string msg = "Hello world";
+
+        string msg = DataGenerator.DatatoString(DataGenerator.getData());
+       
+       
         string sendMSG = AESCipher.Encryption( msg, receiverCH.sessionKey.ToString(16)); // encryption
         var order = receiver.getPublicKey().Curve.Order;
         var signature= receiverCH.Signing(msg, order).ToString(16);
@@ -37,7 +41,6 @@ public class Program
         MessageObject response = api.dataRequest(sendMSG, signature,publicKeyObj).Result;
         var demsg = AESCipher.Decryption(response.message, receiverCH.sessionKey.ToString(16));
         var verifyResult = receiverCH.Verifying(demsg, new BigInteger(response.signature, 16), serverPublickey);
-        
-     
+      
     }
 }
